@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./assets/images/favicon-32x32.png"
+    />
+
+    <title>Frontend Mentor | Notifications page</title>
+
+    <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+    <style>
+      .attribution {
+        font-size: 11px;
+        text-align: center;
+      }
+      .attribution a {
+        color: hsl(228, 45%, 44%);
+      }
+
+      :root {
+        /*Primary Colors*/
+        --primary-red: hsl(1, 90%, 64%);
+        --primary-blue: hsl(219, 85%, 26%);
+        /*Neutral colors*/
+        --neutral-white: hsl(0, 0%, 100%);
+        --light-grayish-blue: hsl(210, 60%, 98%);
+        --light-grayish-blue1: hsl(211, 68%, 94%);
+        --light-grayish-blue2: hsl(205, 33%, 90%);
+        --grayish-blue: hsl(219, 14%, 63%);
+        --dark-grayish-blue: hsl(219, 12%, 42%);
+        --dark-blue: hsl(224, 21%, 14%);
+        /*Font props*/
+        --font: "Plus Jakarta Sans";
+        --font-size: 16px;
+        --font-weight1: 500;
+        --font-weight2: 800;
+      }
+      /*Resetting all the css props*/
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: var(--font);
+      }
+      a {
+        text-decoration: none;
+      }
+      img {
+        width: 50px;
+        height: 50px;
+        margin-right: 12px;
+        margin-left: 10px;
+      }
+      /*Styling the first block level element containing notifications header and mark all as read statement*/
+      header {
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+      }
+
+      header .title {
+        display: inline-block;
+        color: var(var(--dark-blue));
+        font-size: 22px;
+        font-weight: 800;
+        margin-right: 10px;
+      }
+      header .count {
+        background-color: var(--dark-blue);
+        color: white;
+        padding: 4px 12px 4px 12px;
+        border-radius: 5px;
+        font-weight: 500;
+      }
+
+      header .mark-all {
+        align-self: center;
+        font-size: 16px;
+        color: var(--dark-grayish-blue);
+      }
+
+      .mark-all:hover {
+        cursor: pointer;
+        color: var(--primary-blue);
+      }
+
+      section .notifications {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      /*Styling the contact pop notification card*/
+
+      section {
+        padding: 15px;
+      }
+
+      section .notifications .notification-card {
+        display: flex;
+        padding: 5px;
+      }
+
+      section .notifications .notification-card .text-content {
+        align-self: center;
+      }
+
+      .contact-name {
+        display: inline-block;
+        color: var(--dark-blue);
+      }
+      .contact-name:hover,
+      .post:hover {
+        cursor: pointer;
+        color: var(--primary-blue);
+      }
+
+      .is-not-read {
+        width: 7px;
+        height: 7px;
+        background-color: var(--primary-red);
+        display: inline-flex;
+        margin-left: 3px;
+        border-radius: 50%;
+      }
+
+      section .not-read {
+        background-color: var(--light-grayish-blue);
+        border-radius: 8px;
+      }
+
+      section .post {
+        color: var(--dark-grayish-blue);
+      }
+
+      section .notification-time {
+        color: var(--grayish-blue);
+      }
+
+      section .notification {
+        color: var(--grayish-blue);
+      }
+
+      section .group {
+        color: var(--primary-blue);
+      }
+
+      section .private-msg {
+        border: 1px solid;
+        padding: 10px;
+        margin-top: 10px;
+        color: var(--grayish-blue);
+        border-color: var(--light-grayish-blue1);
+        width: 90%;
+        border-radius: 5px;
+      }
+
+      .private-msg:hover {
+        background-color: var(--light-grayish-blue1);
+        cursor: pointer;
+      }
+
+      @media only screen and (min-width: 730px) {
+        body {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          padding: 50px;
+          background-color: var(--light-grayish-blue);
+        }
+
+        .container {
+          width: 50vw;
+          background-color: var(--neutral-white);
+          padding: 20px;
+          border-radius: 10px;
+        }
+      }
+
+      /*These classes will be activated through javascript*/
+
+      .message-read {
+        background-color: var(--neutral-white);
+      }
+      .remove-red-dots {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <div class="title-container">
+          <h2 class="title">Notifications</h2>
+          <span class="count" id="count"></span>
+        </div>
+        <p class="mark-all" id="mark-all">Mark all as read</p>
+      </header>
+
+      <section>
+        <div class="notifications">
+          <div class="notification-card not-read">
+            <div class="contact-img-container">
+              <img src="./assets/images/avatar-mark-webber.webp" alt="" />
+            </div>
+            <div class="text-content">
+              <h4 class="contact-name">Mark Webber</h4>
+              <span class="notification">reacted to your recent post</span>
+              <a href="" class="post"><b>My first tournament today!</b></a>
+              <div class="is-not-read"></div>
+              <p class="notification-time">1m ago</p>
+            </div>
+          </div>
+
+          <div class="notification-card not-read">
+            <div class="contact-img-container">
+              <img src="./assets/images/avatar-angela-gray.webp" alt="" />
+            </div>
+            <div class="text-content">
+              <h4 class="contact-name">Angela Gray</h4>
+              <span class="notification">followed you</span>
+              <div class="is-not-read"></div>
+              <p class="notification-time">5m ago</p>
+            </div>
+          </div>
+
+          <div class="notification-card not-read">
+            <div class="contact-img-container">
+              <img src="./assets/images/avatar-jacob-thompson.webp" alt="" />
+            </div>
+            <div class="text-content">
+              <h4 class="contact-name">Jacob Thompson</h4>
+              <span class="notification">has joined your group</span>
+              <a href="" class="group"><b>Chess Club</b></a>
+              <div class="is-not-read"></div>
+              <p class="notification-time">1 day ago</p>
+            </div>
+          </div>
+
+          <div class="notification-card read">
+            <div class="contact-img-container">
+              <img src="./assets/images/avatar-rizky-hasanuddin.webp" alt="" />
+            </div>
+            <div class="text-content">
+              <h4 class="contact-name">Rizky Hasanuddin</h4>
+              <span class="notification">sent you a private message</span>
+              <p class="notification-time">5 days ago</p>
+              <div class="private-msg">
+                <p>
+                  Hello, thanks for setting up the Chess Club. I've been a
+                  member for a few weeks now and I'm already having lots of fun
+                  and improving my game.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="notification-card read">
+            <div class="contact-img-container">
+              <img src="./assets/images/avatar-kimberly-smith.webp" alt="" />
+            </div>
+            <div class="text-content">
+              <h4 class="contact-name">Kimberly Smith</h4>
+              <span class="notification">commented on your picture</span>
+              <p class="notification-time">1 week ago</p>
+            </div>
+            <img src="./assets/images/image-chess.webp" alt="" />
+          </div>
+
+          <div class="notification-card">
+            <div class="contact-img-container">
+              <img src="./assets/images/avatar-nathan-peterson.webp" alt="" />
+            </div>
+            <div class="text-content">
+              <h4 class="contact-name">Nathan Peterson</h4>
+              <span class="notification">reacted to your recent post</span>
+              <a href="" class="post"
+                ><b>5 end-game strategies to increase your win rate</b></a
+              >
+              <p class="notification-time">2 weeks ago</p>
+            </div>
+          </div>
+
+          <div class="notification-card">
+            <div class="contact-img-container">
+              <img src="./assets/images/avatar-anna-kim.webp" alt="" />
+            </div>
+            <div class="text-content">
+              <h4 class="contact-name">Anna Kim</h4>
+              <span class="notification">left the group</span>
+              <a href="" class="group"><b>Chess Club</b></a>
+              <p class="notification-time">2 weeks ago</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div class="attribution">
+      Challenge by
+      <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
+        >Frontend Mentor</a
+      >. Coded by <a href="#">Tinotenda Jecha</a>.
+    </div>
+
+    <script>
+      const mark_all = document.getElementById("mark-all");
+      const unread_messages = document.querySelectorAll(".not-read");
+      let count_of_unread_messages = document.getElementById("count");
+      let red_dots = document.querySelectorAll(".is-not-read");
+      let count = 3;
+
+      count_of_unread_messages.innerText = count;
+
+      mark_all.addEventListener("click", () => {
+        count = 0;
+        count_of_unread_messages.innerText = count;
+
+        if (count === 0) {
+          for (i = 0; i < unread_messages.length; i++) {
+            //unread_messages[i].style.backgroundColor = 'white';
+            //red_dots[i].style.display = 'none';
+
+            unread_messages[i].classList.remove("not-read");
+            unread_messages[i].classList.add("message-read");
+
+            red_dots[i].classList.remove("is-not-read");
+            red_dots[i].classList.add("remove-red-dots");
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
